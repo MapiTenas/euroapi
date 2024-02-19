@@ -18,6 +18,8 @@ public class Song {
     @Column
     private String duration;
     @Column
+    private String languaje;
+    @Column
     private int votes;
     @Column
     private boolean winner;
