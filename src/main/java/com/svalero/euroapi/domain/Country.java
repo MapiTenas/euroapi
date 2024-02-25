@@ -1,28 +1,31 @@
 package com.svalero.euroapi.domain;
+
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "songs")
-public class Song {
+@Entity(name = "countries")
+public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private String title;
+    private String countryName;
     @Column
-    private float duration;
+    private boolean bigFive;
     @Column
-    private String language;
+    private int editionsWinned;
     @Column
-    private int votes;
+    private String publicBroadcaster;
     @Column
-    private boolean winner;
-    @Column(name ="admission_date")
-    private LocalDate admissionDate;
+    private float participationFee;
+    @Column(name = "joining_date")
+    private LocalDate joiningDate;
 }

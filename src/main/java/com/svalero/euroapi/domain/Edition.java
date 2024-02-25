@@ -1,28 +1,30 @@
 package com.svalero.euroapi.domain;
+
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Cleanup;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.cglib.core.Local;
+
 import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "songs")
-public class Song {
+@Entity(name = "editions")
+public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private String title;
+    private int edition;
     @Column
-    private float duration;
+    private LocalDate finalDate;
     @Column
-    private String language;
+    private String slogan;
     @Column
-    private int votes;
+    private boolean cancelled;
     @Column
-    private boolean winner;
-    @Column(name ="admission_date")
-    private LocalDate admissionDate;
+    private float totalBudget;
 }

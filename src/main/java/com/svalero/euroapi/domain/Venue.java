@@ -8,21 +8,21 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "songs")
-public class Song {
+@Entity(name ="venues")
+public class Venue {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column
-    private String title;
+    private String venueName;
     @Column
-    private float duration;
+    private int capacity;
     @Column
-    private String language;
+    private LocalDate foundationDate;
     @Column
-    private int votes;
+    private boolean adapted;
     @Column
-    private boolean winner;
-    @Column(name ="admission_date")
-    private LocalDate admissionDate;
+    private float latitude;
+    @Column
+    private float longitude;
 }
