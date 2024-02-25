@@ -29,9 +29,9 @@ public class SongService {
         songRepository.save(song);
     }
 
-    public void removeSong (long productId) {
+    public void removeSong (long songId) {
 
-        songRepository.deleteById(productId);
+        songRepository.deleteById(songId);
     }
 
     public void modifySong (Song newSong, long songId) {
@@ -40,7 +40,7 @@ public class SongService {
             Song existingSong = song.get();
             existingSong.setTitle(newSong.getTitle());
             existingSong.setDuration(newSong.getDuration());
-            existingSong.setLanguaje(newSong.getLanguaje());
+            existingSong.setLanguage(newSong.getLanguage());
             existingSong.setVotes(newSong.getVotes());
             existingSong.setWinner(newSong.isWinner());
             existingSong.setAdmissionDate(newSong.getAdmissionDate());

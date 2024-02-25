@@ -20,6 +20,8 @@ public class Artist {
     @Column(name ="birth_date")
     private LocalDate birthDate;
     @Column
+    private String originCountry;
+    @Column
     private int publishedCds;
     @Column
     private boolean active;
