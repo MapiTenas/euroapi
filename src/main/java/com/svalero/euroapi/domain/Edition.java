@@ -20,6 +20,8 @@ public class Edition {
     @Column
     private int edition;
     @Column
+    private String romanNumeralEdition;
+    @Column
     private LocalDate finalDate;
     @Column
     private String slogan;
