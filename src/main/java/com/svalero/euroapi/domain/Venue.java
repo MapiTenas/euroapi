@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -25,4 +26,11 @@ public class Venue {
     private float latitude;
     @Column
     private float longitude;
+
+    @OneToMany(mappedBy = "venue")
+    private List<Venue> venues;
+
+
+
+
 }

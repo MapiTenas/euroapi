@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -28,4 +29,8 @@ public class Country {
     private float participationFee;
     @Column(name = "joining_date")
     private LocalDate joiningDate;
+
+    @OneToMany(mappedBy = "country")
+    private List<Song> songs;
+
 }

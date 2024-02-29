@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -29,4 +30,19 @@ public class Edition {
     private boolean cancelled;
     @Column
     private float totalBudget;
+
+    @OneToMany (mappedBy = "edition")
+    private List<Song> songs;
+
+    @ManyToOne
+    @JoinColumn(name = "venue_id")
+    private Venue venue;
+
+
+
+
+
+
+
+
 }
