@@ -6,11 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6f7925ea-7aa1-4b2f-b6ac-c60c699cb13c" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Edition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Edition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Song.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Venue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Venue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/repository/VenueRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/repository/VenueRepository.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

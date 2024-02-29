@@ -28,7 +28,7 @@ public class Venue {
     private float longitude;
 
     @OneToMany(mappedBy = "venue")
-    private List<Venue> venues;
+    private List<Edition> editions;
 
 
 
