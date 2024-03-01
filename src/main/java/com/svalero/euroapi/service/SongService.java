@@ -20,8 +20,12 @@ public class SongService {
         return songRepository.findById(id);
     }
 
-    public Song getSongByTitle(String title){
+    public List<Song> getSongByTitle(String title){
         return songRepository.findByTitle(title);
+    }
+
+    public List<Song> getSongByTitleAndVotes(String title, int votes) {
+        return songRepository.findByTitleAndVotes(title, votes);
     }
 
     public void saveSong(Song song) {

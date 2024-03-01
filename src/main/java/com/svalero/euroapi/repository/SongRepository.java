@@ -7,5 +7,7 @@ import java.util.List;
 @Repository
 public interface SongRepository extends CrudRepository<Song, Long> {
     List<Song> findAll();
-    Song findByTitle(String title);
+    List <Song> findByTitle(String title);
+    List <Song> findByTitleAndVotes(String title, int votes);
+
 }
