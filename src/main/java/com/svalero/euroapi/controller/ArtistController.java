@@ -13,7 +13,31 @@ public class ArtistController {
     private ArtistService artistService;
 
     @GetMapping("/artists")
-    public List<Artist> getAll() {return artistService.getArtists();}
+    public List<Artist> getAll(@RequestParam(defaultValue = "") String name,
+                               @RequestParam(defaultValue = "") String originCountry,
+                               @RequestParam(defaultValue = "") String active) {
+        if (!name.isEmpty()) {
+            if (!originCountry.isEmpty() && !active.isEmpty()) {
+                return artistService.getArtistByNameAndOriginCountryAndActive(name, originCountry, Boolean.valueOf(active));
+            } else if (!originCountry.isEmpty()) {
+                return artistService.getArtistByNameAndOriginCountry(name, originCountry);
+            } else if (!active.isEmpty()) {
+                return artistService.getArtistByNameAndActive(name, Boolean.valueOf(active));
+            } else {
+                return artistService.getArtistbyName(name);
+            }
+        } else if (!originCountry.isEmpty()) {
+            if (!active.isEmpty()) {
+                return artistService.getArtistByOriginCountryAndActive(originCountry, Boolean.valueOf(active));
+            } else {
+                return artistService.getArtistByOriginCountry(originCountry);
+            }
+        } else if (!active.isEmpty()) {
+            return artistService.getArtistByActive(Boolean.valueOf(active));
+        } else {
+            return artistService.getArtists();
+        }
+    }
 
     @PostMapping("/artists")
     public void saveArtist (@RequestBody Artist artist) {

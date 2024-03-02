@@ -13,7 +13,36 @@ public class VenueController {
     private VenueService venueService;
 
     @GetMapping("/venues")
-    public List<Venue> getAll(){return venueService.getVenues(); }
+    public List<Venue> getAll(@RequestParam(defaultValue = "") String venueName,
+                              @RequestParam(defaultValue = "") String city,
+                              @RequestParam(defaultValue = "") String adapted) {
+        if (!venueName.isEmpty()){
+            if (!city.isEmpty() && !adapted.isEmpty()) {
+                return venueService.getVenueByVenueNameAndCityAndAdapted(venueName,city,Boolean.valueOf(adapted));
+            } else if (!city.isEmpty()) {
+                return venueService.getVenueByVenueNameAndCity(venueName,city);
+            } else if (!adapted.isEmpty()){
+                return venueService.getVenueByVenueNameAndAdapted(venueName, Boolean.valueOf(adapted));
+            } else {
+                return venueService.getVenueByVenueName(venueName);
+            }
+        } else if (!city.isEmpty()) {
+            if (!adapted.isEmpty()) {
+                return venueService.getVenueByCityAndAdapted(city, Boolean.valueOf(adapted));
+            } else {
+                return venueService.getVenueByCity(city);
+            }
+        } else if (!adapted.isEmpty()){
+            return venueService.getVenueByAdapted(Boolean.valueOf(adapted));
+        } else {
+         return venueService.getVenues();
+        }
+    }
+
+
+
+
+
 
     @PostMapping("/venues")
     public void saveVenues (@RequestBody Venue venue) {

@@ -1,5 +1,4 @@
 package com.svalero.euroapi.service;
-import com.svalero.euroapi.domain.Country;
 import com.svalero.euroapi.domain.Edition;
 import com.svalero.euroapi.repository.EditionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +10,14 @@ import java.util.Optional;
 public class EditionService {
     @Autowired
     private EditionRepository editionRepository;
-
     public List<Edition> getEditions() {return editionRepository.findAll(); }
-
+    public List<Edition> getEditionByEdition(int edition){return editionRepository.findByEdition(edition);}
+    public List<Edition> getEditionByCountryOrganizer(String countryOrganizer){return editionRepository.findByCountryOrganizer(countryOrganizer);}
+    public List<Edition> getEditionByCancelled(boolean cancelled){return editionRepository.findByCancelled(cancelled);}
+    public List<Edition> getEditionByEditionAndCountryOrganizer(int edition, String countryOrganizer){return editionRepository.findByEditionAndCountryOrganizer(edition, countryOrganizer);}
+    public List<Edition> getEditionByEditionAndCancelled(int edition, boolean cancelled){return editionRepository.findByEditionAndCancelled(edition,cancelled);}
+    public List<Edition> getEditionByCountryOrganizerAndCancelled(String countryOrganizer, boolean cancelled) {return editionRepository.findByCountryOrganizerAndCancelled(countryOrganizer,cancelled);}
+    public List<Edition> getEditionByEditionAndCountryOrganizerAndCancelled(int edition, String countryOrganizer, boolean cancelled){return editionRepository.findByEditionAndCountryOrganizerAndCancelled(edition,countryOrganizer,cancelled);}
     public void saveEdition(Edition edition) {editionRepository.save(edition); }
 
     public void removeEdition(long editionId){editionRepository.deleteById(editionId);}
@@ -24,6 +28,7 @@ public class EditionService {
             Edition existingEdition = edition.get();
             existingEdition.setEdition(newEdition.getEdition());
             existingEdition.setRomanNumeralEdition(newEdition.getRomanNumeralEdition());
+            existingEdition.setCountryOrganizer(newEdition.getCountryOrganizer());
             existingEdition.setFinalDate(newEdition.getFinalDate());
             existingEdition.setSlogan(newEdition.getSlogan());
             existingEdition.setCancelled(newEdition.isCancelled());

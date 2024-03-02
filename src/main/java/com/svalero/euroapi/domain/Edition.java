@@ -23,6 +23,8 @@ public class Edition {
     @Column
     private String romanNumeralEdition;
     @Column
+    private String countryOrganizer;
+    @Column
     private LocalDate finalDate;
     @Column
     private String slogan;

@@ -3,7 +3,6 @@ import com.svalero.euroapi.domain.Artist;
 import com.svalero.euroapi.repository.ArtistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +13,24 @@ public class ArtistService {
     private ArtistRepository artistRepository;
 
     public List<Artist> getArtists() {return artistRepository.findAll();}
+
+    public List<Artist> getArtistbyName(String name){return artistRepository.findByName(name);}
+
+    public List<Artist> getArtistByOriginCountry(String originCountry){return artistRepository.findByOriginCountry(originCountry);}
+
+    public List<Artist> getArtistByActive(boolean active){return artistRepository.findByActive(active);}
+
+    public List<Artist> getArtistByNameAndOriginCountry(String name, String originCountry) {return artistRepository.findByNameAndOriginCountry(name, originCountry);}
+
+    public List<Artist> getArtistByNameAndActive(String name, boolean active){return artistRepository.findByNameAndActive(name, active);}
+
+    public List<Artist> getArtistByOriginCountryAndActive(String originCountry, boolean active) {return artistRepository.findByOriginCountryAndActive(originCountry, active);}
+
+    public List<Artist> getArtistByNameAndOriginCountryAndActive(String name, String originCountry, boolean active){return artistRepository.findByNameAndOriginCountryAndActive(name, originCountry, active);}
+
+
+
+
 
     public void saveArtist (Artist artist){
         artistRepository.save(artist);

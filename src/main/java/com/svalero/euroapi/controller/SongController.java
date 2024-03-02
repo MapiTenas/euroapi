@@ -24,15 +24,31 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public List<Song> getAll(@RequestParam(defaultValue = "") String title, @RequestParam(defaultValue = "0") int votes) {
-        if (!title.isEmpty() && votes == 0) {
-            return songService.getSongByTitle(title);
-        } else if (!title.isEmpty() && votes != 0) {
-            return songService.getSongByTitleAndVotes(title, votes);
+    public List<Song> getAll(@RequestParam(defaultValue = "") String title,
+                             @RequestParam(defaultValue = "0") int votes,
+                             @RequestParam(defaultValue = "") String winner) {
+        if (!title.isEmpty()) {
+            if (votes !=0 && !winner.isEmpty()) {
+                return songService.getSongByTitleAndVotesAndWinner(title, votes, Boolean.valueOf(winner));
+            } else if (votes != 0) {
+                return songService.getSongByTitleAndVotes(title, votes);
+            } else if (!winner.isEmpty()) {
+                return songService.getSongByTitleAndWinner(title, Boolean.valueOf(winner));
+            } else {
+                return songService.getSongByTitle(title);
+            }
+        } else if (votes != 0) {
+            if (!winner.isEmpty()) {
+                return songService.getSongByVotesAndWinner(votes, Boolean.valueOf(winner));
+            } else {
+                return songService.getSongByVotes(votes);
+            }
+        } else if (!winner.isEmpty()) {
+            return songService.getSongByWinner(Boolean.valueOf(winner));
+        } else {
+            return songService.getSongs();
         }
-        return songService.getSongs();
     }
-
 
 
     @PostMapping("/songs")

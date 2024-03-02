@@ -17,6 +17,8 @@ public class Venue {
     @Column
     private String venueName;
     @Column
+    private String city;
+    @Column
     private int capacity;
     @Column
     private LocalDate foundationDate;

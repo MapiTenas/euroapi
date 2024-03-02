@@ -24,8 +24,25 @@ public class SongService {
         return songRepository.findByTitle(title);
     }
 
+    public List <Song> getSongByVotes(int votes){
+        return songRepository.findByVotes(votes);
+    }
+
+    public List <Song> getSongByWinner(boolean winner) {return songRepository.findByWinner(winner);}
     public List<Song> getSongByTitleAndVotes(String title, int votes) {
         return songRepository.findByTitleAndVotes(title, votes);
+    }
+
+    public List <Song> getSongByTitleAndWinner(String title, boolean winner) {
+        return songRepository.findByTitleAndWinner(title, winner);
+    }
+
+    public List <Song> getSongByVotesAndWinner(int votes, boolean winner) {
+        return songRepository.findByVotesAndWinner(votes, winner);
+    }
+
+    public List <Song> getSongByTitleAndVotesAndWinner(String title, int votes, boolean winner) {
+        return songRepository.findByTitleAndVotesAndWinner(title, votes, winner);
     }
 
     public void saveSong(Song song) {
