@@ -11,6 +11,7 @@ public class EditionService {
     @Autowired
     private EditionRepository editionRepository;
     public List<Edition> getEditions() {return editionRepository.findAll(); }
+    public Optional<Edition> getEditionById(long id) {return editionRepository.findById(id);}
     public List<Edition> getEditionByEdition(int edition){return editionRepository.findByEdition(edition);}
     public List<Edition> getEditionByCountryOrganizer(String countryOrganizer){return editionRepository.findByCountryOrganizer(countryOrganizer);}
     public List<Edition> getEditionByCancelled(boolean cancelled){return editionRepository.findByCancelled(cancelled);}

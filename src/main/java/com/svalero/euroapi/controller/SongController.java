@@ -58,15 +58,23 @@ public class SongController {
     }
 
     @DeleteMapping("/song/{songId}")
-    public void removeSong(@PathVariable long songId) {
-
-        songService.removeSong(songId);
+    public void removeSong(@PathVariable long songId) throws SongNotFoundException{
+        Optional<Song> optionalSong = songService.getSongById(songId);
+            if(optionalSong.isPresent()) {
+                songService.removeSong(songId);
+            } else {
+                throw new SongNotFoundException(songId);
+            }
     }
 
     @PutMapping("/song/{songId}")
-    public void modifySong(@RequestBody Song song, @PathVariable long songId) {
-
-        songService.modifySong(song, songId);
+    public void modifySong(@RequestBody Song song, @PathVariable long songId) throws SongNotFoundException {
+        Optional<Song> optionalSong = songService.getSongById(songId);
+        if (optionalSong.isPresent()) {
+            songService.modifySong(song, songId);
+        } else {
+            throw new SongNotFoundException(songId);
+        }
     }
 
     @ExceptionHandler(SongNotFoundException.class)

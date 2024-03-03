@@ -1,16 +1,29 @@
 package com.svalero.euroapi.controller;
+import com.svalero.euroapi.domain.ErrorResponse;
+import com.svalero.euroapi.domain.Song;
 import com.svalero.euroapi.domain.Venue;
+import com.svalero.euroapi.exception.SongNotFoundException;
+import com.svalero.euroapi.exception.VenueNotFoundException;
 import com.svalero.euroapi.service.VenueService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 public class VenueController {
 
     @Autowired
     private VenueService venueService;
+
+    @GetMapping("/venue/{venueId}")
+    public Venue getVenue(@PathVariable long venueId) throws VenueNotFoundException {
+        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
+        return optionalVenue.orElseThrow(() -> new VenueNotFoundException(venueId));
+    }
 
     @GetMapping("/venues")
     public List<Venue> getAll(@RequestParam(defaultValue = "") String venueName,
@@ -39,23 +52,34 @@ public class VenueController {
         }
     }
 
-
-
-
-
-
     @PostMapping("/venues")
     public void saveVenues (@RequestBody Venue venue) {
         venueService.saveVenue(venue);
     }
     @DeleteMapping("/venue/{venueId}")
-    public void removeVenue(@PathVariable long venueId) {
-        venueService.removeVenue(venueId);
+    public void removeVenue(@PathVariable long venueId) throws VenueNotFoundException {
+        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
+            if (optionalVenue.isPresent()) {
+                venueService.removeVenue(venueId);
+            } else {
+                throw new VenueNotFoundException(venueId);
+            }
     }
 
     @PutMapping("/venue/{venueId}")
-    public void modifyVenue(@RequestBody Venue venue, @PathVariable long venueId) {
-        venueService.modifyVenue(venue, venueId);
+    public void modifyVenue(@RequestBody Venue venue, @PathVariable long venueId) throws VenueNotFoundException {
+        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
+            if (optionalVenue.isPresent()) {
+                venueService.modifyVenue(venue, venueId);
+            } else {
+                throw new VenueNotFoundException(venueId);
+            }
+    }
+
+    @ExceptionHandler(VenueNotFoundException.class)
+    public ResponseEntity<ErrorResponse> venueNotFoundException(VenueNotFoundException vnfe) {
+        ErrorResponse errorResponse = new ErrorResponse(404, vnfe.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 
 

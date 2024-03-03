@@ -14,7 +14,7 @@ public class VenueService {
     private VenueRepository venueRepository;
 
     public List<Venue> getVenues() {return venueRepository.findAll(); }
-
+    public Optional<Venue> getVenueById(long id){return venueRepository.findById(id);}
     public List<Venue> getVenueByVenueName(String venueName) {return venueRepository.findByVenueName(venueName);}
     public List<Venue> getVenueByCity(String city) {return venueRepository.findByCity(city);}
     public List<Venue> getVenueByAdapted(boolean adapted){return venueRepository.findByAdapted(adapted);}

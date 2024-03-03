@@ -14,6 +14,9 @@ public class ArtistService {
 
     public List<Artist> getArtists() {return artistRepository.findAll();}
 
+    public Optional<Artist> getArtistById(long id){
+        return artistRepository.findById(id);
+    }
     public List<Artist> getArtistbyName(String name){return artistRepository.findByName(name);}
 
     public List<Artist> getArtistByOriginCountry(String originCountry){return artistRepository.findByOriginCountry(originCountry);}

@@ -12,6 +12,7 @@ public class CountryService {
     private CountryRepository countryRepository;
 
     public List<Country> getCountries() {return countryRepository.findAll(); }
+    public Optional<Country> getCountryById(long id){return countryRepository.findById(id);}
     public List<Country> getCountryByCountryName(String countryName){return countryRepository.findByCountryName(countryName);}
     public List<Country> getCountryByBigFive(boolean bigFive){return countryRepository.findByBigFive(bigFive);}
     public List<Country> getCountryByEditionsWinned(int editionsWinned){return countryRepository.findByEditionsWinned(editionsWinned);}
