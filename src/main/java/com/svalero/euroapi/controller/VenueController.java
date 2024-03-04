@@ -5,12 +5,17 @@ import com.svalero.euroapi.domain.Venue;
 import com.svalero.euroapi.exception.SongNotFoundException;
 import com.svalero.euroapi.exception.VenueNotFoundException;
 import com.svalero.euroapi.service.VenueService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -53,8 +58,9 @@ public class VenueController {
     }
 
     @PostMapping("/venues")
-    public void saveVenues (@RequestBody Venue venue) {
+    public ResponseEntity<Venue> saveVenues (@Valid @RequestBody Venue venue) {
         venueService.saveVenue(venue);
+        return new ResponseEntity<>(venue, HttpStatus.CREATED);
     }
     @DeleteMapping("/venue/{venueId}")
     public void removeVenue(@PathVariable long venueId) throws VenueNotFoundException {
@@ -80,6 +86,19 @@ public class VenueController {
     public ResponseEntity<ErrorResponse> venueNotFoundException(VenueNotFoundException vnfe) {
         ErrorResponse errorResponse = new ErrorResponse(404, vnfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
     }
 
 

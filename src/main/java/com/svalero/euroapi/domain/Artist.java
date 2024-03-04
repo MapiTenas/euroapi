@@ -16,13 +16,13 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotBlank(message ="Artist's name is obligatory.")
+    @NotBlank(message ="Artist name field is obligatory.")
     @Column
     private String name;
     @Past(message = "The date of birth must be before the current date")
     @Column(name ="birth_date")
     private LocalDate birthDate;
-    @NotBlank(message ="Artist's origin country is obligatory.")
+    @NotBlank(message ="Artist's origin country field is obligatory.")
     @Column
     private String originCountry;
     @Column
