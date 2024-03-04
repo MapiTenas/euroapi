@@ -4,12 +4,17 @@ import com.svalero.euroapi.domain.ErrorResponse;
 import com.svalero.euroapi.exception.ArtistNotFoundException;
 import com.svalero.euroapi.exception.SongNotFoundException;
 import com.svalero.euroapi.service.ArtistService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -53,9 +58,11 @@ public class ArtistController {
     }
 
     @PostMapping("/artists")
-    public void saveArtist (@RequestBody Artist artist) {
+    public ResponseEntity<Artist> saveArtist(@Valid @RequestBody Artist artist) {
         artistService.saveArtist(artist);
+        return new ResponseEntity<>(artist, HttpStatus.CREATED);
     }
+
     @DeleteMapping("/artist/{artistId}")
     public void removeArtist(@PathVariable long artistId) throws ArtistNotFoundException {
         Optional<Artist> optionalArtist = artistService.getArtistById(artistId);
@@ -79,5 +86,19 @@ public class ArtistController {
         ErrorResponse errorResponse = new ErrorResponse(404, anfe.getMessage());
         return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
+
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public Map<String, String> handleValidationExceptions(
+            MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+        ex.getBindingResult().getAllErrors().forEach((error) -> {
+            String fieldName = ((FieldError) error).getField();
+            String errorMessage = error.getDefaultMessage();
+            errors.put(fieldName, errorMessage);
+        });
+        return errors;
+    }
+
 
 }
