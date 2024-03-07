@@ -1,8 +1,21 @@
 package com.svalero.euroapi.service;
 import com.svalero.euroapi.domain.Edition;
+import com.svalero.euroapi.domain.ErrorResponse;
+import com.svalero.euroapi.domain.Venue;
+import com.svalero.euroapi.domain.dto.EditionInDto;
+import com.svalero.euroapi.domain.dto.EditionOutDto;
+import com.svalero.euroapi.exception.EditionNotFoundException;
+import com.svalero.euroapi.exception.VenueNotFoundException;
 import com.svalero.euroapi.repository.EditionRepository;
+import com.svalero.euroapi.repository.VenueRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -10,31 +23,95 @@ import java.util.Optional;
 public class EditionService {
     @Autowired
     private EditionRepository editionRepository;
-    public List<Edition> getEditions() {return editionRepository.findAll(); }
-    public Optional<Edition> getEditionById(long id) {return editionRepository.findById(id);}
-    public List<Edition> getEditionByEdition(int edition){return editionRepository.findByEdition(edition);}
-    public List<Edition> getEditionByCountryOrganizer(String countryOrganizer){return editionRepository.findByCountryOrganizer(countryOrganizer);}
-    public List<Edition> getEditionByCancelled(boolean cancelled){return editionRepository.findByCancelled(cancelled);}
-    public List<Edition> getEditionByEditionAndCountryOrganizer(int edition, String countryOrganizer){return editionRepository.findByEditionAndCountryOrganizer(edition, countryOrganizer);}
-    public List<Edition> getEditionByEditionAndCancelled(int edition, boolean cancelled){return editionRepository.findByEditionAndCancelled(edition,cancelled);}
-    public List<Edition> getEditionByCountryOrganizerAndCancelled(String countryOrganizer, boolean cancelled) {return editionRepository.findByCountryOrganizerAndCancelled(countryOrganizer,cancelled);}
-    public List<Edition> getEditionByEditionAndCountryOrganizerAndCancelled(int edition, String countryOrganizer, boolean cancelled){return editionRepository.findByEditionAndCountryOrganizerAndCancelled(edition,countryOrganizer,cancelled);}
-    public void saveEdition(Edition edition) {editionRepository.save(edition); }
-
-    public void removeEdition(long editionId){editionRepository.deleteById(editionId);}
-
-    public void modifyEdition (Edition newEdition, long editionId) {
-        Optional<Edition> edition = editionRepository.findById(editionId);
-        if (edition.isPresent()){
-            Edition existingEdition = edition.get();
-            existingEdition.setEdition(newEdition.getEdition());
-            existingEdition.setRomanNumeralEdition(newEdition.getRomanNumeralEdition());
-            existingEdition.setCountryOrganizer(newEdition.getCountryOrganizer());
-            existingEdition.setFinalDate(newEdition.getFinalDate());
-            existingEdition.setSlogan(newEdition.getSlogan());
-            existingEdition.setCancelled(newEdition.isCancelled());
-            existingEdition.setTotalBudget(newEdition.getTotalBudget());
-            editionRepository.save(edition.get());
+    @Autowired
+    private VenueRepository venueRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+    public List<EditionOutDto> getEditions(Integer editionNum, String countryOrganizer,String cancelled) {
+        List<Edition> editionList;
+        if (editionNum != 0){
+            if (!countryOrganizer.isEmpty() && !cancelled.isEmpty()){
+                editionList = editionRepository.findByEditionNumAndCountryOrganizerAndCancelled(editionNum, countryOrganizer,Boolean.valueOf(cancelled));
+            } else if (!countryOrganizer.isEmpty()) {
+                editionList = editionRepository.findByEditionNumAndCountryOrganizer(editionNum,countryOrganizer);
+            } else if (!cancelled.isEmpty()) {
+                editionList = editionRepository.findByEditionNumAndCancelled(editionNum, Boolean.valueOf(cancelled));
+            } else {
+                editionList = editionRepository.findByEditionNum(editionNum);
+            }
+        } else if (!countryOrganizer.isEmpty()) {
+            if (!cancelled.isEmpty()){
+                editionList = editionRepository.findByCountryOrganizerAndCancelled(countryOrganizer, Boolean.valueOf(cancelled));
+            } else {
+                editionList = editionRepository.findByCountryOrganizer(countryOrganizer);
+            }
+        } else if (!cancelled.isEmpty()){
+            editionList = editionRepository.findByCancelled(Boolean.valueOf(cancelled));
+        } else {
+            editionList = editionRepository.findAll();
         }
+
+        List<EditionOutDto> editionOutDtoList = new ArrayList<>();
+        for (Edition editionItem : editionList) {
+            editionOutDtoList.add(modelMapper.map(editionItem, EditionOutDto.class));
+        }
+        return editionOutDtoList;
+    }
+    public EditionOutDto getEditionById(long id) throws EditionNotFoundException{
+        Optional<Edition> editionOptional = editionRepository.findById(id);
+        if(editionOptional.isPresent()) {
+            return modelMapper.map(editionOptional.get(), EditionOutDto.class);
+        } else {
+            throw new EditionNotFoundException(id);
+        }
+    }
+    public EditionOutDto saveEdition(EditionInDto editionInDto) throws VenueNotFoundException {
+        Edition edition = modelMapper.map(editionInDto, Edition.class);
+        Long venueId = editionInDto.getVenueId();
+
+        Optional<Venue> venueOptional = venueRepository.findById(venueId);
+        if(venueOptional.isPresent()){
+            edition.setVenue(venueOptional.get());
+        } else {
+            throw new VenueNotFoundException(venueId);
+        }
+        return modelMapper.map(editionRepository.save(edition), EditionOutDto.class);
+    }
+
+    public void removeEdition(long editionId) throws EditionNotFoundException{
+        if(editionRepository.existsById(editionId)) {
+            editionRepository.deleteById(editionId);
+        } else {
+            throw new EditionNotFoundException(editionId);
+        }
+    }
+
+    public EditionOutDto modifyEdition (long editionId, EditionInDto editionInDto) throws EditionNotFoundException, VenueNotFoundException {
+        Optional<Edition> editionOptional = editionRepository.findById(editionId);
+        if (editionOptional.isPresent()){
+            Edition edition = editionOptional.get();
+            modelMapper.map(editionInDto, edition);
+            Long venueId = editionInDto.getVenueId();
+            Optional<Venue> venueOptional = venueRepository.findById(venueId);
+            if (venueOptional.isPresent()) {
+                edition.setVenue(venueOptional.get());
+            } else {
+                throw new VenueNotFoundException(venueId);
+            }
+            return modelMapper.map(editionRepository.save(edition), EditionOutDto.class);
+        } else {
+            throw new EditionNotFoundException(editionId);
+        }
+    }
+    @ExceptionHandler(EditionNotFoundException.class)
+    public ResponseEntity<ErrorResponse> editionNotFoundException(EditionNotFoundException enfe) {
+        ErrorResponse errorResponse = new ErrorResponse(404, enfe.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(VenueNotFoundException.class)
+    public ResponseEntity<ErrorResponse> venueNotFoundException(VenueNotFoundException vnfe) {
+        ErrorResponse errorResponse = new ErrorResponse(404, vnfe.getMessage());
+        return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
     }
 }

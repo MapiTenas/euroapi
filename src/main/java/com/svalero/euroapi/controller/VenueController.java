@@ -1,8 +1,8 @@
 package com.svalero.euroapi.controller;
 import com.svalero.euroapi.domain.ErrorResponse;
-import com.svalero.euroapi.domain.Song;
 import com.svalero.euroapi.domain.Venue;
-import com.svalero.euroapi.exception.SongNotFoundException;
+import com.svalero.euroapi.domain.dto.VenueInDto;
+import com.svalero.euroapi.domain.dto.VenueOutDto;
 import com.svalero.euroapi.exception.VenueNotFoundException;
 import com.svalero.euroapi.service.VenueService;
 import jakarta.validation.Valid;
@@ -25,61 +25,48 @@ public class VenueController {
     private VenueService venueService;
 
     @GetMapping("/venue/{venueId}")
-    public Venue getVenue(@PathVariable long venueId) throws VenueNotFoundException {
-        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
-        return optionalVenue.orElseThrow(() -> new VenueNotFoundException(venueId));
-    }
-
-    @GetMapping("/venues")
-    public List<Venue> getAll(@RequestParam(defaultValue = "") String venueName,
-                              @RequestParam(defaultValue = "") String city,
-                              @RequestParam(defaultValue = "") String adapted) {
-        if (!venueName.isEmpty()){
-            if (!city.isEmpty() && !adapted.isEmpty()) {
-                return venueService.getVenueByVenueNameAndCityAndAdapted(venueName,city,Boolean.valueOf(adapted));
-            } else if (!city.isEmpty()) {
-                return venueService.getVenueByVenueNameAndCity(venueName,city);
-            } else if (!adapted.isEmpty()){
-                return venueService.getVenueByVenueNameAndAdapted(venueName, Boolean.valueOf(adapted));
-            } else {
-                return venueService.getVenueByVenueName(venueName);
-            }
-        } else if (!city.isEmpty()) {
-            if (!adapted.isEmpty()) {
-                return venueService.getVenueByCityAndAdapted(city, Boolean.valueOf(adapted));
-            } else {
-                return venueService.getVenueByCity(city);
-            }
-        } else if (!adapted.isEmpty()){
-            return venueService.getVenueByAdapted(Boolean.valueOf(adapted));
-        } else {
-         return venueService.getVenues();
+    public ResponseEntity<VenueOutDto> getVenue(@PathVariable long venueId) {
+        try {
+            VenueOutDto venueOutDto = venueService.getVenueById(venueId);
+            return ResponseEntity.ok(venueOutDto);
+        } catch (VenueNotFoundException vnfe) {
+            throw new RuntimeException(vnfe);
         }
     }
 
-    @PostMapping("/venues")
-    public ResponseEntity<Venue> saveVenues (@Valid @RequestBody Venue venue) {
-        venueService.saveVenue(venue);
-        return new ResponseEntity<>(venue, HttpStatus.CREATED);
+
+    @GetMapping("/venues")
+    public ResponseEntity<List<VenueOutDto>> getAll(@RequestParam(defaultValue = "") String venueName,
+                              @RequestParam(defaultValue = "") String city,
+                              @RequestParam(defaultValue = "") String adapted) {
+        List<VenueOutDto> venueOutDtoList = venueService.getVenues(venueName, city, adapted);
+        return ResponseEntity.ok(venueOutDtoList);
     }
+
+    @PostMapping("/venues")
+    public ResponseEntity<VenueOutDto> saveVenues (@Valid @RequestBody VenueInDto venueInDto) {
+        VenueOutDto venueOutDto = venueService.saveVenue(venueInDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(venueOutDto);
+    }
+
     @DeleteMapping("/venue/{venueId}")
-    public void removeVenue(@PathVariable long venueId) throws VenueNotFoundException {
-        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
-            if (optionalVenue.isPresent()) {
-                venueService.removeVenue(venueId);
-            } else {
-                throw new VenueNotFoundException(venueId);
-            }
+    public ResponseEntity<Void> removeVenue(@PathVariable long venueId) {
+        try {
+            venueService.removeVenue(venueId);
+            return ResponseEntity.noContent().build();
+        } catch (VenueNotFoundException vnfe) {
+            throw new RuntimeException(vnfe);
+        }
     }
 
     @PutMapping("/venue/{venueId}")
-    public void modifyVenue(@RequestBody Venue venue, @PathVariable long venueId) throws VenueNotFoundException {
-        Optional<Venue> optionalVenue = venueService.getVenueById(venueId);
-            if (optionalVenue.isPresent()) {
-                venueService.modifyVenue(venue, venueId);
-            } else {
-                throw new VenueNotFoundException(venueId);
-            }
+    public ResponseEntity<VenueOutDto> modifyVenue(@PathVariable long venueId, @Valid @RequestBody VenueInDto venueInDto){
+       try {
+           VenueOutDto venueOutDto = venueService.modifyVenue(venueId, venueInDto);
+           return ResponseEntity.ok(venueOutDto);
+       } catch (VenueNotFoundException vnfe) {
+           throw new RuntimeException(vnfe);
+       }
     }
 
     @ExceptionHandler(VenueNotFoundException.class)

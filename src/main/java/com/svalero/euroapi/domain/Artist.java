@@ -1,4 +1,6 @@
 package com.svalero.euroapi.domain;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Past;
@@ -16,13 +18,10 @@ public class Artist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotBlank(message ="Artist name field is obligatory.")
     @Column
     private String name;
-    @Past(message = "The date of birth must be before the current date")
     @Column(name ="birth_date")
     private LocalDate birthDate;
-    @NotBlank(message ="Artist's origin country field is obligatory.")
     @Column
     private String originCountry;
     @Column
@@ -33,5 +32,6 @@ public class Artist {
     private float igFollowers;
 
     @OneToMany(mappedBy = "artist")
+    @JsonIgnore
     private List<Song> songs;
 }

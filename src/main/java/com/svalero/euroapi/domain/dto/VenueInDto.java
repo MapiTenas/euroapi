@@ -1,42 +1,26 @@
-package com.svalero.euroapi.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import jakarta.persistence.*;
+package com.svalero.euroapi.domain.dto;
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.time.LocalDate;
-import java.util.List;
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity(name ="venues")
-public class Venue {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+@NoArgsConstructor
+
+public class VenueInDto {
     @NotBlank(message = "Venue name field is obligatory.")
-    @Column
     private String venueName;
     @NotBlank(message = "City name field is obligatory.")
-    @Column
     private String city;
-    @Column
     @Min(value = 1000, message = "Capacity venue must be greater than 1000.")
     private int capacity;
-    @Column
     private LocalDate foundationDate;
-    @Column
     private boolean adapted;
-    @Column
     private float latitude;
-    @Column
     private float longitude;
-
-    @OneToMany(mappedBy = "venue")
-    @JsonIgnore
-    private List<Edition> editions;
 }

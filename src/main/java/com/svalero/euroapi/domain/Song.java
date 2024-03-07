@@ -1,4 +1,5 @@
 package com.svalero.euroapi.domain;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
@@ -14,15 +15,12 @@ public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @NotBlank(message = "Song title field is obligatory.")
     @Column
     private String title;
     @Column
     private float duration;
-    @NotBlank(message = "Song language field is obligatory.")
     @Column
     private String language;
-    @Min(value = 0, message = "Votes cannot be less than zero.")
     @Column
     private int votes;
     @Column
@@ -32,13 +30,16 @@ public class Song {
 
     @ManyToOne
     @JoinColumn(name = "artist_id")
+    @JsonBackReference
     private Artist artist;
 
     @ManyToOne
     @JoinColumn(name = "country_id")
+    @JsonBackReference
     private Country country;
 
     @ManyToOne
     @JoinColumn(name = "edition_id")
+    @JsonBackReference
     private Edition edition;
 }

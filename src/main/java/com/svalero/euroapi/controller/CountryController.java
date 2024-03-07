@@ -1,6 +1,8 @@
 package com.svalero.euroapi.controller;
 import com.svalero.euroapi.domain.Country;
 import com.svalero.euroapi.domain.ErrorResponse;
+import com.svalero.euroapi.domain.dto.CountryInDto;
+import com.svalero.euroapi.domain.dto.CountryOutDto;
 import com.svalero.euroapi.exception.CountryNotFoundException;
 import com.svalero.euroapi.service.CountryService;
 import jakarta.validation.Valid;
@@ -22,60 +24,45 @@ public class CountryController {
     private CountryService countryService;
 
     @GetMapping("/country/{countryId}")
-    public Country getCountry(@PathVariable long countryId) throws CountryNotFoundException {
-        Optional<Country> optionalCountry = countryService.getCountryById(countryId);
-        return optionalCountry.orElseThrow(() -> new CountryNotFoundException(countryId));
+    public ResponseEntity<CountryOutDto> getCountry(@PathVariable long countryId){
+        try {
+            CountryOutDto countryOutDto = countryService.getCountryById(countryId);
+            return ResponseEntity.ok(countryOutDto);
+        } catch (CountryNotFoundException cnfc) {
+            throw new RuntimeException(cnfc);
+        }
     }
     @GetMapping("/countries")
-    public List<Country> getAll(@RequestParam(defaultValue = "") String countryName,
-                                @RequestParam(defaultValue = "") String bigFive,
-                                @RequestParam(defaultValue = "0") int editionsWinned) {
-        if (!countryName.isEmpty()){
-            if(!bigFive.isEmpty() && editionsWinned !=0){
-                return countryService.getCountryByCountryNameAndBigFiveAndEditionsWinned(countryName,Boolean.valueOf(bigFive),editionsWinned);
-            }else if(!bigFive.isEmpty()){
-                return countryService.getCountryByCountryNameAndBigFive(countryName, Boolean.valueOf(bigFive));
-            }else if (editionsWinned !=0) {
-                return countryService.getCountryByCountryNameAndEditionsWinned(countryName, editionsWinned);
-            } else {
-                return countryService.getCountryByCountryName(countryName);
-            }
-        } else if (!bigFive.isEmpty()) {
-            if (editionsWinned !=0) {
-                return countryService.getCountryByBigFiveAndEditionsWinned(Boolean.valueOf(bigFive), editionsWinned);
-            } else {
-                return countryService.getCountryByBigFive(Boolean.valueOf(bigFive));
-            }
-        } else if (editionsWinned != 0) {
-            return countryService.getCountryByEditionsWinned(editionsWinned);
-        } else {
-            return countryService.getCountries();
-        }
+    public ResponseEntity<List<CountryOutDto>> getCountries(@RequestParam(defaultValue = "") String countryName,
+                                      @RequestParam(defaultValue = "") String bigFive,
+                                      @RequestParam(defaultValue = "0") int editionsWinned) {
+        List<CountryOutDto> countryOutDtoList = countryService.getCountries(countryName, bigFive, editionsWinned);
+        return ResponseEntity.ok(countryOutDtoList);
     }
 
     @PostMapping("/countries")
-    public ResponseEntity<Country> saveCountry (@Valid @RequestBody Country country) {
-        countryService.saveCountry(country);
-        return new ResponseEntity<>(country, HttpStatus.CREATED);
+    public ResponseEntity<CountryOutDto> saveCountry (@Valid @RequestBody CountryInDto countryInDto) {
+        CountryOutDto countryOutDto = countryService.saveCountry(countryInDto);
+        return ResponseEntity.status(HttpStatus.CREATED).body(countryOutDto);
     }
 
     @DeleteMapping("/country/{countryId}")
-    public void removeCountry(@PathVariable long countryId) throws CountryNotFoundException {
-        Optional<Country> optionalCountry = countryService.getCountryById(countryId);
-            if(optionalCountry.isPresent()) {
-                countryService.removeCountry(countryId);
-            } else {
-                throw new CountryNotFoundException(countryId);
-            }
+    public ResponseEntity<Void> removeCountry(@PathVariable long countryId) {
+        try {
+            countryService.removeCountry(countryId);
+            return ResponseEntity.noContent().build();
+        } catch (CountryNotFoundException cnfe) {
+            throw new RuntimeException(cnfe);
+        }
     }
 
     @PutMapping("/country/{countryId}")
-    public void modifyCountry(@RequestBody Country country, @PathVariable long countryId) throws CountryNotFoundException {
-        Optional<Country> optionalCountry = countryService.getCountryById(countryId);
-        if (optionalCountry.isPresent()) {
-            countryService.modifyCountry(country, countryId);
-        } else {
-            throw new CountryNotFoundException(countryId);
+    public ResponseEntity<CountryOutDto> modifyCountry(@PathVariable long countryId, @Valid @RequestBody CountryInDto countryInDto){
+        try {
+            CountryOutDto countryOutDto = countryService.modifyCountry(countryId, countryInDto);
+            return ResponseEntity.ok(countryOutDto);
+        } catch (CountryNotFoundException cnfe) {
+            throw new RuntimeException(cnfe);
         }
     }
 

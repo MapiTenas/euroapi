@@ -1,10 +1,12 @@
 package com.svalero.euroapi.domain;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,13 +22,10 @@ public class Edition {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @Min(value= 1, message = "Edition number field must be bigger than zero.")
-    @Column
-    private int edition;
-    @NotBlank(message ="Roman Numeral Edition field is obligatory.")
+    @Column(name ="editionNum")
+    private Integer editionNum;
     @Column
     private String romanNumeralEdition;
-    @NotBlank(message="Country organizer field is obligatory.")
     @Column
     private String countryOrganizer;
     @Column
@@ -35,14 +34,15 @@ public class Edition {
     private String slogan;
     @Column
     private boolean cancelled;
-    @DecimalMin(value = "0.01", message = "Total bugdet must be greater than zero.")
     @Column
     private float totalBudget;
 
     @OneToMany (mappedBy = "edition")
+    @JsonIgnore
     private List<Song> songs;
 
     @ManyToOne
     @JoinColumn(name = "venue_id")
+    @JsonBackReference
     private Venue venue;
 }
