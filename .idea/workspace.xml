@@ -5,25 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6f7925ea-7aa1-4b2f-b6ac-c60c699cb13c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/dto/VenueOutDto.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/ArtistController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/ArtistController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/CountryController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/CountryController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/EditionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/EditionController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/SongController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/SongController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/VenueController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/controller/VenueController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Artist.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Artist.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Edition.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Edition.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Song.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Song.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Venue.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/domain/Venue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/repository/EditionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/repository/EditionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/ArtistService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/ArtistService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/CountryService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/CountryService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/EditionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/EditionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/SongService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/SongService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/VenueService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/svalero/euroapi/service/VenueService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +49,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "C:/Users/mapit/Desktop/helloapi/helloapi",
+    "last_opened_file_path": "C:/Users/mapit/Desktop/euroapi",
     "settings.editor.selected.configurable": "project.propVCSSupport.DirectoryMappings"
   }
 }]]></component>
