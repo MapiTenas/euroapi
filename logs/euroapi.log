@@ -1,0 +1,66 @@
+2024-03-08 10:40:56,612 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-03-08 10:40:56,650 INFO o.s.b.StartupInfoLogger [main] Starting EuroapiApplication using Java 20 with PID 12616 (C:\Users\mapit\Desktop\euroapi\target\classes started by mapit in C:\Users\mapit\Desktop\euroapi)
+2024-03-08 10:40:56,652 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-03-08 10:40:57,176 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-03-08 10:40:57,230 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 46 ms. Found 5 JPA repository interfaces.
+2024-03-08 10:40:57,696 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8090 (http)
+2024-03-08 10:40:57,706 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8090"]
+2024-03-08 10:40:57,709 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-03-08 10:40:57,710 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-03-08 10:40:57,762 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-03-08 10:40:57,764 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1073 ms
+2024-03-08 10:40:57,799 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-03-08 10:40:58,004 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/euroapi.db user=SA
+2024-03-08 10:40:58,006 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-03-08 10:40:58,015 INFO o.s.b.a.h.H2ConsoleAutoConfiguration [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/euroapi.db'
+2024-03-08 10:40:58,112 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-03-08 10:40:58,156 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-03-08 10:40:58,184 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-03-08 10:40:58,363 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-03-08 10:40:58,398 WARN o.h.e.j.d.i.DialectFactoryImpl [main] HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-03-08 10:40:59,244 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-03-08 10:40:59,289 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-03-08 10:40:59,656 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-03-08 10:40:59,912 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8090"]
+2024-03-08 10:40:59,930 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8090 (http) with context path ''
+2024-03-08 10:40:59,938 INFO o.s.b.StartupInfoLogger [main] Started EuroapiApplication in 3.699 seconds (process running for 3.997)
+2024-03-08 10:41:16,884 INFO o.s.o.j.AbstractEntityManagerFactoryBean [SpringApplicationShutdownHook] Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-03-08 10:41:16,886 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown initiated...
+2024-03-08 10:41:16,898 INFO c.z.h.HikariDataSource [SpringApplicationShutdownHook] HikariPool-1 - Shutdown completed.
+2024-03-08 13:42:17,492 INFO o.h.v.i.u.Version [background-preinit] HV000001: Hibernate Validator 8.0.1.Final
+2024-03-08 13:42:17,534 INFO o.s.b.StartupInfoLogger [main] Starting EuroapiApplication using Java 20 with PID 1076 (C:\Users\mapit\Desktop\euroapi\target\classes started by mapit in C:\Users\mapit\Desktop\euroapi)
+2024-03-08 13:42:17,535 INFO o.s.b.SpringApplication [main] No active profile set, falling back to 1 default profile: "default"
+2024-03-08 13:42:18,044 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-03-08 13:42:18,095 INFO o.s.d.r.c.RepositoryConfigurationDelegate [main] Finished Spring Data repository scanning in 44 ms. Found 5 JPA repository interfaces.
+2024-03-08 13:42:18,542 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port 8090 (http)
+2024-03-08 13:42:18,552 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8090"]
+2024-03-08 13:42:18,555 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2024-03-08 13:42:18,556 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/10.1.18]
+2024-03-08 13:42:18,602 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2024-03-08 13:42:18,604 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1036 ms
+2024-03-08 13:42:18,629 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Starting...
+2024-03-08 13:42:18,840 INFO c.z.h.p.HikariPool [main] HikariPool-1 - Added connection conn0: url=jdbc:h2:file:~/euroapi.db user=SA
+2024-03-08 13:42:18,842 INFO c.z.h.HikariDataSource [main] HikariPool-1 - Start completed.
+2024-03-08 13:42:18,851 INFO o.s.b.a.h.H2ConsoleAutoConfiguration [main] H2 console available at '/h2-console'. Database available at 'jdbc:h2:file:~/euroapi.db'
+2024-03-08 13:42:18,945 INFO o.h.j.i.u.LogHelper [main] HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-03-08 13:42:18,990 INFO o.h.Version [main] HHH000412: Hibernate ORM core version 6.4.1.Final
+2024-03-08 13:42:19,015 INFO o.h.c.i.RegionFactoryInitiator [main] HHH000026: Second-level cache disabled
+2024-03-08 13:42:19,187 INFO o.s.o.j.p.SpringPersistenceUnitInfo [main] No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-03-08 13:42:19,222 WARN o.h.e.j.d.i.DialectFactoryImpl [main] HHH90000025: H2Dialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2024-03-08 13:42:20,036 INFO o.h.e.t.j.p.i.JtaPlatformInitiator [main] HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-03-08 13:42:20,084 INFO o.s.o.j.AbstractEntityManagerFactoryBean [main] Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-03-08 13:42:20,449 WARN o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration [main] spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-03-08 13:42:20,704 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8090"]
+2024-03-08 13:42:20,722 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port 8090 (http) with context path ''
+2024-03-08 13:42:20,729 INFO o.s.b.StartupInfoLogger [main] Started EuroapiApplication in 3.607 seconds (process running for 3.897)
+2024-03-08 13:42:43,293 INFO o.a.j.l.DirectJDKLog [http-nio-8090-exec-2] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-03-08 13:42:43,294 INFO o.s.w.s.FrameworkServlet [http-nio-8090-exec-2] Initializing Servlet 'dispatcherServlet'
+2024-03-08 13:42:43,295 INFO o.s.w.s.FrameworkServlet [http-nio-8090-exec-2] Completed initialization in 1 ms
+2024-03-08 13:42:43,330 INFO c.s.e.c.SongController [http-nio-8090-exec-2] ini GET /songs
+2024-03-08 13:42:43,472 INFO c.s.e.c.SongController [http-nio-8090-exec-2] end GET /songs
+2024-03-08 13:42:48,473 INFO c.s.e.c.ArtistController [http-nio-8090-exec-3] ini GET /artists
+2024-03-08 13:42:48,493 INFO c.s.e.c.ArtistController [http-nio-8090-exec-3] end GET /artists
+2024-03-08 13:43:41,137 INFO c.s.e.c.SongController [http-nio-8090-exec-8] ini POST /songs
+2024-03-08 13:43:41,178 INFO c.s.e.c.SongController [http-nio-8090-exec-8] end POST /songs
+2024-03-08 13:43:46,649 INFO c.s.e.c.ArtistController [http-nio-8090-exec-5] ini GET /artists
+2024-03-08 13:43:46,657 INFO c.s.e.c.ArtistController [http-nio-8090-exec-5] end GET /artists

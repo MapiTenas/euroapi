@@ -15,8 +15,6 @@ public class CountryOutDto {
     private boolean bigFive;
     private int editionsWinned;
     private String publicBroadcaster;
-    private float participationFee;
-    private LocalDate joiningDate;
     private List<Song> songs;
 
 }

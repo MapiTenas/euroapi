@@ -19,7 +19,6 @@ public class EditionOutDto {
     private LocalDate finalDate;
     private String slogan;
     private boolean cancelled;
-    private float totalBudget;
     private Venue venue;
     private List<Song> songs;
 }

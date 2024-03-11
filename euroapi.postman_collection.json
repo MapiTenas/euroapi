@@ -1,0 +1,870 @@
+{
+	"info": {
+		"_postman_id": "df08e171-96d9-4e86-a21f-38cb807b4448",
+		"name": "euroapi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31328466"
+	},
+	"item": [
+		{
+			"name": "songs",
+			"item": [
+				{
+					"name": "/songs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/song/:songId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/song/:songId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"song",
+								":songId"
+							],
+							"variable": [
+								{
+									"key": "songId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/songs?title=&votes=&winner (findByNameAndVotesAndWinner)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/songs?title=&votes=&winner=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"songs"
+							],
+							"query": [
+								{
+									"key": "title",
+									"value": ""
+								},
+								{
+									"key": "votes",
+									"value": ""
+								},
+								{
+									"key": "winner",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/songs",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"Space Man\",\r\n    \"duration\": 3.41,\r\n    \"language\": \"English\",\r\n    \"votes\": 531,\r\n    \"winner\": false,\r\n    \"admissionDate\": \"2022-03-07\",\r\n    \"artistId\": 321,\r\n    \"countryId\": 1,\r\n    \"editionId\": 1 \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/songs",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"songs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/song/:songId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/song/:songId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"song",
+								":songId"
+							],
+							"variable": [
+								{
+									"key": "songId",
+									"value": "194"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/song/:songId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\r\n    \"title\": \"Space Man\",\r\n    \"duration\": 3.41,\r\n    \"language\": \"English\",\r\n    \"votes\": 500,\r\n    \"winner\": false,\r\n    \"admissionDate\": \"2022-03-07\",\r\n    \"artistId\": 321,\r\n    \"countryId\": 1,\r\n    \"editionId\": 1 \r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/song/:songId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"song",
+								":songId"
+							],
+							"variable": [
+								{
+									"key": "songId",
+									"value": "289"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "artists",
+			"item": [
+				{
+					"name": "/artists",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/artists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/artist/:artistId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/artist/:artistId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artist",
+								":artistId"
+							],
+							"variable": [
+								{
+									"key": "artistId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/artists?name=&originCountry=&active= (findByNameAndOriginCountryAndActive)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/artists?name=&originCountry=&active=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artists"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": ""
+								},
+								{
+									"key": "originCountry",
+									"value": ""
+								},
+								{
+									"key": "active",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/artists",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "\r\n{\r\n    \"name\": \"Sam Ryder\",\r\n    \"birthDate\": \"1986-06-20\",\r\n    \"originCountry\": \"United Kingdom\",\r\n    \"publishedCds\": 1,\r\n    \"active\": true,\r\n    \"igFollowers\": 21000.0\r\n}\r\n\r\n\r\n\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/artists",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artists"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/artist/:artistId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/artist/:artistId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artist",
+								":artistId"
+							],
+							"variable": [
+								{
+									"key": "artistId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/artist/:artistId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Loreen\",\r\n    \"birthDate\": \"1983-10-16\",\r\n    \"originCountry\": \"Sweden\",\r\n    \"publishedCds\": 2,\r\n    \"active\": true,\r\n    \"igFollowers\": 745000.0\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/artist/:artistId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"artist",
+								":artistId"
+							],
+							"variable": [
+								{
+									"key": "artistId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "countries",
+			"item": [
+				{
+					"name": "/countries",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/country/:countryId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/country/:countryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"country",
+								":countryId"
+							],
+							"variable": [
+								{
+									"key": "countryId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/countries?countryName=&bigFive=&editionsWinned= (findByCountryNameAndBigFiveAndEditionsWinned)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/countries?countryName=&bigFive=&editionsWinned=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"countries"
+							],
+							"query": [
+								{
+									"key": "countryName",
+									"value": ""
+								},
+								{
+									"key": "bigFive",
+									"value": ""
+								},
+								{
+									"key": "editionsWinned",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/countries",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"countryName\": \"Italy\",\r\n    \"bigFive\": true,\r\n    \"editionsWinned\": 2,\r\n    \"publicBroadcaster\": \"RAI\",\r\n    \"participationFee\": 123110.0,\r\n    \"joiningDate\": \"1956-03-31\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/countries",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"countries"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/country/:countryId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/country/:countryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"country",
+								":countryId"
+							],
+							"variable": [
+								{
+									"key": "countryId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/country/:countryId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"countryName\": \"Kingdom of Sweden\",\r\n    \"bigFive\": true,\r\n    \"editionsWinned\": 7,\r\n    \"publicBroadcaster\": \"SVT\",\r\n    \"participationFee\": 100500.0,\r\n    \"joiningDate\": \"1958-03-12\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/country/:countryId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"country",
+								":countryId"
+							],
+							"variable": [
+								{
+									"key": "countryId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "editions",
+			"item": [
+				{
+					"name": "/editions",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/editions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"editions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/edition/:editionId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/edition/:editionId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"edition",
+								":editionId"
+							],
+							"variable": [
+								{
+									"key": "editionId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/editions?editionNum=&countryOrganizer=&cancelled= (findByEditionAndCountryOrganizerAndCancelled)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/editions?editionNum=&countryOrganizer=&cancelled=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"editions"
+							],
+							"query": [
+								{
+									"key": "editionNum",
+									"value": ""
+								},
+								{
+									"key": "countryOrganizer",
+									"value": ""
+								},
+								{
+									"key": "cancelled",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/editions",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"editionNum\": 56,\r\n    \"romanNumeralEdition\": \"LVI\",\r\n    \"countryOrganizer\": \"Germany\",\r\n    \"finalDate\": \"2011-05-14\",\r\n    \"slogan\": \"Feel Your Heart Beat!\",\r\n    \"cancelled\": false,\r\n    \"totalBudget\": 3000000.45,\r\n    \"venueId\": 1 \r\n    \r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/editions",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"editions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/edition/:editionId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/edition/:editionId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"edition",
+								":editionId"
+							],
+							"variable": [
+								{
+									"key": "editionId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/edition/:editionId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"editionNum\": 67,\r\n    \"romanNumeralEdition\": \"LXVII\",\r\n    \"countryOrganizer\": \"United Kingdom\",\r\n    \"finalDate\": \"2023-05-13\",\r\n    \"slogan\": \"United by Music\",\r\n    \"cancelled\": false,\r\n    \"totalBudget\": 50000.32,\r\n    \"venueId\": 1 \r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/edition/:editionId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"edition",
+								":editionId"
+							],
+							"variable": [
+								{
+									"key": "editionId",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "venues",
+			"item": [
+				{
+					"name": "/venues",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/venues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/venue/:venueId",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/venue/:venueId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venue",
+								":venueId"
+							],
+							"variable": [
+								{
+									"key": "venueId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/venues?venueName=&city=&adapted= (findByVenueNameAndCityAndAdapted)",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/venues?venueName=&city=&adapted=",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venues"
+							],
+							"query": [
+								{
+									"key": "venueName",
+									"value": ""
+								},
+								{
+									"key": "city",
+									"value": ""
+								},
+								{
+									"key": "adapted",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/venues",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"venueName\": \"Expo Tel Aviv\",\r\n    \"city\": \"Tel Aviv\",\r\n    \"capacity\": 10000,\r\n    \"foundationDate\": \"1959-01-01\",\r\n    \"adapted\": true,\r\n    \"latitude\": 32.115,\r\n    \"longitude\": 34.782\r\n}\r\n\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/venues",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venues"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/venue/:venueId",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8090/venue/:venueId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venue",
+								":venueId"
+							],
+							"variable": [
+								{
+									"key": "venueId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/venue/:venueId",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"venueName\":\"Liverpool Arena\",\r\n    \"city\":\"Liverpool\",\r\n    \"capacity\": 11000,\r\n    \"foundationDate\":\"2008-01-12\",\r\n    \"adapted\": true,\r\n    \"latitude\":53.396667,\r\n    \"longitude\":-2.990958\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8090/venue/:venueId",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8090",
+							"path": [
+								"venue",
+								":venueId"
+							],
+							"variable": [
+								{
+									"key": "venueId",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

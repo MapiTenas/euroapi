@@ -1,0 +1,1341 @@
+openapi: 3.0.1
+info:
+  title: EuroApi
+  description: API that allows you to work on a complete crud (and custom methods) using information about Eurovision.
+  version: 1.0.0
+servers:
+  - url: 'localhost/8090'
+
+tags:
+
+  - name: artists
+    description: Operations to work with the artists' data.
+  - name: songs
+    description: Operations to work with the songs' data.
+  - name: countries
+    description: Operations to work with the countries' data.
+  - name: venues
+    description: Operations to work with the venues' data.
+  - name: editions
+    description: Operations to work with the editions' data.
+
+paths:
+  /artists:
+    get:
+      tags:
+        - artists
+      summary: Returns a list of Eurovision artists.
+      description: This operation returns a eurovision artists' list.
+      parameters:
+        - name: name
+          in: query
+          description: Artist name
+          required: false
+          schema:
+            type: string
+        - name: originCountry
+          in: query
+          description: Artist country origin.
+          required: false
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: Defines if an artist is still active or not.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns the complete list of artists.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistOutDto'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - artists
+      summary: Add a new artist register.
+      description: Allows to ad a new Eurovision artist to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArtistInDto'
+      responses:
+        '201':
+          description: New artist has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistInDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /artist/{id}:
+    get:
+      tags:
+        - artists
+      summary: Returns an artist by id.
+      description: This operations returns a artist information using its id.
+      parameters:
+        - name: id
+          in: path
+          description: Artist id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns an unique artist information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistOutDto'
+    delete:
+      tags:
+        - artists
+      summary: Delete an artist by its id.
+      description: This operation deletes an artist using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Artist id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - artists
+      summary: Update an artists by its ID.
+      description: This operation update a artist using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Artist id
+          required: true
+          schema:
+            type: number
+        - name: artist_data
+          in: query
+          description: Updated artist data
+          required: true
+          schema:
+            $ref: '#/components/schemas/ArtistInDto'
+      responses:
+        '200':
+          description: Artist updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArtistOutDto'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /songs:
+    get:
+      tags:
+        - songs
+      summary: Returns a list of Eurovision songs.
+      description: This operation returns a eurovision songs' list.
+      parameters:
+        - name: name
+          in: query
+          description: Artist name
+          required: false
+          schema:
+            type: string
+        - name: originCountry
+          in: query
+          description: Artist country origin.
+          required: false
+          schema:
+            type: string
+        - name: active
+          in: query
+          description: Defines if an artist is still active or not.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns the complete list of songs.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SongOutDto'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - songs
+      summary: Add a new song register.
+      description: Allows to ad a new Eurovision song to the database.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SongInDto'
+      responses:
+        '201':
+          description: New song has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/SongInDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /song/{id}:
+    get:
+      tags:
+        - songs
+      summary: Return a song by id.
+      description: This operation returns a song usings its id.
+      parameters:
+        - name: id
+          in: path
+          description: Artist id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique song information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArtistOutDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - songs
+      summary: Delete a song by its ID.
+      description: This operations deletes a song using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Song id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      tags:
+        - songs
+      summary: Update a song by its ID.
+      description: This operation updates a song using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Song id
+          required: true
+          schema:
+            type: number
+        - name: song_data
+          in: query
+          description: Updated song data
+          required: true
+          schema:
+            $ref: '#/components/schemas/SongInDto'
+      responses:
+        '200':
+          description: Song updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SongOutDto'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /countries:
+    get:
+      tags:
+        - countries
+      summary: Returns a list of countries that participates in Eurovision.
+      description: This operation returns a countries list.
+      parameters:
+        - name: countryName
+          in: query
+          description: Country name
+          required: false
+          schema:
+            type: string
+        - name: bigFive
+          in: query
+          description: Determines if the country it's one of the Big Five.
+          required: false
+          schema:
+            type: boolean
+        - name: editionsWinned
+          in: query
+          description: Number of editions winned by the country.
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns the complete list of countries.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryOutDto'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - countries
+      summary: Adds a new country.
+      description: Allows to add a new country that participates in Eurovision.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CountryInDto'
+      responses:
+        '201':
+          description: New country has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryInDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /country/{id}:
+    get:
+      tags:
+        - countries
+      summary: Returns a country by id.
+      description: This operation returns a Eurovision participant country using its id.
+      parameters:
+        - name: id
+          in: path
+          description: Country id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique country information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CountryOutDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - countries
+      summary: Delete a country by its ID.
+      description: This operation deletes a country using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Country id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - countries
+      summary: Update a country by its ID.
+      description: This operation updates a country using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Country id
+          required: true
+          schema:
+            type: number
+        - name: country_data
+          in: query
+          description: Updated country data
+          required: true
+          schema:
+            $ref: '#/components/schemas/CountryInDto'
+      responses:
+        '200':
+          description: Country updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CountryOutDto'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /editions:
+    get:
+      tags:
+        - editions
+      summary: Returns a list of Eurovision editions.
+      description: This operation returns a Eurovision edition's list.
+      parameters:
+        - name: editionNum
+          in: query
+          description: Edition number
+          required: false
+          schema:
+            type: number
+        - name: countryOrganizer
+          in: query
+          description: Name of the country that host this edition.
+          required: false
+          schema:
+            type: string
+        - name: cancelled
+          in: query
+          description: Defines if the edition was cancelled.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns the complete list of Eurovision editions.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EditionOutDto'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - editions
+      summary: Adds a new Eurovision edition.
+      description: Allows to add a new edition.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EditionInDto'
+      responses:
+        '201':
+          description: New edition has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EditionInDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /edition/{id}:
+    get:
+      tags:
+        - editions
+      summary: Return a edition by id.
+      description: This operation returns a Eurovision edition using its id.
+      parameters:
+        - name: id
+          in: path
+          description: Edition id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique Eurovision edition information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EditionOutDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - editions
+      summary: Delete a Eurovision edition by its ID.
+      description: This operation deletes a edition using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Edition id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - editions
+      summary: Update a Eurovision edition by its ID.
+      description: This operation updates a edition using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Edition id
+          required: true
+          schema:
+            type: number
+        - name: edition_data
+          in: query
+          description: Updated edition data
+          required: true
+          schema:
+            $ref: '#/components/schemas/EditionInDto'
+      responses:
+        '200':
+          description: Edition updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EditionOutDto'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+  /venues:
+    get:
+      tags:
+        - venues
+      summary: Returns a list of Eurovision venues.
+      description: This operation returns a Eurovision venues' list.
+      parameters:
+        - name: venueName
+          in: query
+          description: Venue name
+          required: false
+          schema:
+            type: string
+        - name: city
+          in: query
+          description: Venue's city
+          required: false
+          schema:
+            type: string
+        - name: adapted
+          in: query
+          description: Defines if the venue is adapted for disabled people.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: Returns the complete list of Eurovision venues.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VenueOutDto'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    post:
+      tags:
+        - venues
+      summary: Adds a new Eurovision venue.
+      description: Allows to add a new venue.
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VenueInDto'
+      responses:
+        '201':
+          description: New venue has been registered.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VenueInDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InternalServerError'
+  /venues/{id}:
+    get:
+      tags:
+        - venues
+      summary: Return a venue by id.
+      description: This operation returns a Eurovision venue using its id.
+      parameters:
+        - name: id
+          in: path
+          description: Venue id
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Returns a unique venue information.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/VenueOutDto'
+        '400':
+          description: Validation error on input data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    delete:
+      tags:
+        - venues
+      summary: Delete a venue by its ID.
+      description: This operation deletes a venue using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Venue id
+          required: true
+          schema:
+            type: number
+      responses:
+        '204':
+          description: Information deleted.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NoContent'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+    put:
+      tags:
+        - venues
+      summary: Update a venue by its ID.
+      description: This operation updates a venue using its ID.
+      parameters:
+        - name: id
+          in: path
+          description: Venue id
+          required: true
+          schema:
+            type: number
+        - name: venue_data
+          in: query
+          description: Updated venue data
+          required: true
+          schema:
+            $ref: '#/components/schemas/VenueInDto'
+      responses:
+        '200':
+          description: Venue updated successfully.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VenueInDto'
+        '400':
+          description: Validation error on input data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BadRequest'
+        '404':
+          description: Information not found.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/NotFound'
+        '500':
+          description: Internal Server Error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  schemas:
+    ArtistOutDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 10
+          description: Artist identifier.
+        name:
+          type: string
+          example: Sam Ryder
+          description: Artist name.
+        birthDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 1989-06-25
+          description: Artist birth date.
+        originCountry:
+          type: string
+          example: United Kingdom.
+          description: Country of origin of the artist.
+        publishedCds:
+          type: number
+          format: int32
+          example: 1
+          description: Number of cds published by the artist.
+        active:
+          type: boolean
+          description: Declares if the artist is still active.
+        songs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SongOutDto'
+    ArtistInDto:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Sam Ryder
+          description: Artist name.
+        birthDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 1989-06-25
+          description: Artist birth date.
+        originCountry:
+          type: string
+          example: United Kingdom.
+          description: Country of origin of the artist.
+        publishedCds:
+          type: number
+          format: int32
+          example: 1
+          description: Number of cds published by the artist.
+        active:
+          type: boolean
+          description: Declares if the artist is still active.
+        igFollowers:
+          type: number
+          format: float
+          example: 231414.5
+          description: Number of instagram followers of the artist.
+    SongOutDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 14
+          description: Song identifier.
+        title:
+          type: string
+          example: Space Man
+          description: Song title
+        duration:
+          type: number
+          format: float
+          description: Duration of the song
+          example: 2.5
+        language:
+          type: string
+          example: English
+          description: Language in which the song is sung.
+        votes:
+          type: number
+          format: in32
+          example: 466
+          description: Votes recibed in the contest.
+        winner:
+          type: boolean
+          description: Declares if the song won the edition.
+        admissionDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2022-02-22
+          description: Admission date of the song in the contest
+        artist:
+          type: object
+          items:
+            $ref: '#/components/schemas/ArtistOutDto'
+        country:
+          type: object
+          items:
+            $ref: '#/components/schemas/CountryOutDto'
+        edition:
+          type: object
+          items:
+            $ref: '#/components/schemas/EditionOutDto'
+    SongInDto:
+      type: object
+      properties:
+        title:
+          type: string
+          example: Space Man
+          description: Song title
+        duration:
+          type: number
+          format: float
+          description: Duration of the song
+          example: 2.5
+        language:
+          type: string
+          example: English
+          description: Language in which the song is sung.
+        votes:
+          type: number
+          format: int32
+          example: 466
+          description: Votes recibed in the contest.
+        winner:
+          type: boolean
+          description: Declares if the song won the edition.
+        admissionDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2022-02-22
+          description: Admission date of the song in the contest
+        artistId:
+          type: number
+          format: int32
+          example: 10
+          description: Id of the Artist of the song.
+        countryId:
+          type: number
+          format: int32
+          example: 4
+          description: Id of the country represented by the song.
+        editionId:
+          type: number
+          format: int32
+          example: 34
+          description: Id of the edition in which this song competes.
+    CountryOutDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 4
+          description: Country identifier.
+        countryName:
+          type: string
+          example: United Kingdom
+          description: Country official name.
+        bigFive:
+          type: boolean
+          description: Declares if the country is part of the Big Five and automatically qualify for the final along with the host country.
+        editionsWinned:
+          type: number
+          format: int32
+          example: 5
+          description: Number of editions winned by the country.
+        publicBroadcaster:
+          type: string
+          example: BBC
+          description: Public broadcaster in charge of broadcasting the festival in the country on television/radio/internet and organizing its delegations.
+        songs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SongOutDto'
+    CountryInDto:
+      type: object
+      properties:
+        countryName:
+          type: string
+          example: United Kingdom
+          description: Country official name.
+        bigFive:
+          type: boolean
+          description: Declares if the country is part of the Big Five and automatically qualify for the final along with the host country.
+        editionsWinned:
+          type: number
+          format: int32
+          example: 5
+          description: Number of editions winned by the country.
+        publicBroadcaster:
+          type: string
+          example: BBC
+          description: Public broadcaster in charge of broadcasting the festival in the country on television/radio/internet and organizing its delegations.
+        participationFee:
+          type: number
+          format: float
+          example: 67891.50
+          description: Participation fee that every country must pay to participate in the contest.
+        joiningDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 1957-03-03
+          description: Date of the first edition where the country competed.
+    EditionOutDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 34
+          description: Edition identifier.
+        editionNum:
+          type: number
+          format: int32
+          example: 66
+          description: Edition number in chronological order.
+        romanNumeralEdition:
+          type: string
+          example: LXVI
+          description: Edition number in roman numerals
+        countryOrganizer:
+          type: string
+          example: Italy
+          description: Country that host this edition.
+        finalDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2022-05-14
+          description: Date of the Grand Final of this edition.
+        slogan:
+          type: string
+          example: The sound of beauty
+          description: Slogan of the edition
+        cancelled:
+          type: boolean
+          description: Declares if the edition was cancelled.
+        venue:
+          type: object
+          items:
+            $ref: '#/components/schemas/VenueOutDto'
+        songs:
+          type: array
+          items:
+            $ref: '#/components/schemas/SongOutDto'
+    EditionInDto:
+      type: object
+      properties:
+        editionNum:
+          type: number
+          format: int32
+          example: 66
+          description: Edition number in chronological order.
+        romanNumeralEdition:
+          type: string
+          example: LXVI
+          description: Edition number in roman numerals
+        countryOrganizer:
+          type: string
+          example: Italy
+          description: Country that host this edition.
+        finalDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2022-05-14
+          description: Date of the Grand Final of this edition.
+        slogan:
+          type: string
+          example: The sound of beauty
+          description: Slogan of the edition
+        cancelled:
+          type: boolean
+          description: Declares if the edition was cancelled.
+        totalBudget:
+          type: number
+          format: float
+          example: 8127331.50
+          description: Total budget of the edition.
+        venueId:
+          type: number
+          format: int32
+          example: 78
+          description: Id of the venue that host this edition.
+    VenueOutDto:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int32
+          example: 55
+          description: Venue identifier.
+        venueName:
+          type: string
+          example: PalaAlpitour
+          description: Name of the venue
+        city:
+          type: string
+          example: Turin
+          description: City where the venue is located.
+        capacity:
+          type: number
+          format: int32
+          example: 18000
+          description: Venue capacity to accommodate spectators.
+        foundationDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2005-12-13
+          description: Construction date.
+        adapted:
+          type: boolean
+          description: Informs if the venue is adapted for disabled people.
+        latitude:
+          type: number
+          format: float
+          example: 45.041667
+        longitude:
+          type: number
+          format: float
+          example: 7.652222
+        editions:
+          type: array
+          items:
+            $ref: '#/components/schemas/EditionOutDto'
+    VenueInDto:
+      type: object
+      properties:
+        venueName:
+          type: string
+          example: PalaAlpitour
+          description: Name of the venue
+        city:
+          type: string
+          example: Turin
+          description: City where the venue is located.
+        capacity:
+          type: number
+          format: int32
+          example: 18000
+          description: Venue capacity to accommodate spectators.
+        foundationDate:
+          type: string
+          format: YYYY-MM-DD
+          example: 2005-12-13
+          description: Construction date.
+        adapted:
+          type: boolean
+          description: Informs if the venue is adapted for disabled people.
+        latitude:
+          type: number
+          format: float
+          example: 45.041667
+        longitude:
+          type: number
+          format: float
+          example: 7.652222
+    ErrorResponse:
+      type: object
+      properties:
+        code:
+          type: number
+          format: int32
+        message:
+          type: string
+        errors:
+          type: array
+          items:
+            type: string
+    NoContent:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 204
+        message: No Content
+    BadRequest:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 400
+        message: Validation error
+    NotFound:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 404
+        message: Not found
+    InternalServerError:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/ErrorResponse'
+      example:
+        code: 500
+        message: Internal Server Error
+        error: [ ]
